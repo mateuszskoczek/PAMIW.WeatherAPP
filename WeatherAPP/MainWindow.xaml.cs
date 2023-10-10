@@ -57,6 +57,15 @@ namespace WeatherAPP
             Task alertsTask = client.GetAlerts(city);
             tasks.Add(alertsTask);
 
+            Task indicesTask = client.GetIndices(city);
+            tasks.Add(indicesTask);
+
+            Task fiveDayForecastTask = client.Get5DayForecast(city);
+            tasks.Add(fiveDayForecastTask);
+
+            Task historicalForecastTask = client.GetHistorical24hForecast(city);
+            tasks.Add(historicalForecastTask);
+
             await Task.WhenAll(tasks);
 
             if (forecastTask.Result is null)
