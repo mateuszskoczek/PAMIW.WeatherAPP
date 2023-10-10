@@ -46,6 +46,10 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Miasto i data"/>
             <TextBlock Grid.Row="0" Grid.Column="2" x:Name="CityTB"/>
@@ -61,6 +65,12 @@
             <TextBlock Grid.Row="10" Grid.Column="2" x:Name="PressureTB"/>
             <TextBlock Grid.Row="12" Grid.Column="0" Text="Alerty"/>
             <TextBlock Grid.Row="12" Grid.Column="2" x:Name="AlertsTB"/>
+            <TextBlock Grid.Row="14" Grid.Column="0" Text="Temperatura (z ostatnich 24h)"/>
+            <TextBlock Grid.Row="14" Grid.Column="2" x:Name="Temp24hTB"/>
+            <TextBlock Grid.Row="16" Grid.Column="0" Text="Temperatura (następne 5 dni)"/>
+            <TextBlock Grid.Row="16" Grid.Column="2" x:Name="Temp5dTB"/>
+            <TextBlock Grid.Row="18" Grid.Column="0" Text="Indeksy"/>
+            <TextBlock Grid.Row="18" Grid.Column="2" x:Name="IndicesTB"/>
         </Grid>
     </Grid>
 </Window>

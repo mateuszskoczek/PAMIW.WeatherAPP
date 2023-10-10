@@ -1,6 +1,12 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Diagnostics;
 using WeatherAPP.APIClient.Models;
+using WeatherAPP.APIClient.Models.GetCities;
+using WeatherAPP.APIClient.Models.GetCurrentForecast;
+using WeatherAPP.APIClient.Models.GetHistorical24hForecast;
+using WeatherAPP.APIClient.Models.GetIndices;
 
 namespace WeatherAPP.APIClient
 {
@@ -16,10 +22,6 @@ namespace WeatherAPP.APIClient
         private const string FIVE_DAY_FORECAST_ENDPOINT = $"{BASE_URL}/forecasts/v1/daily/5day/{{0}}?apikey={{1}}&language={{2}}&metric=true&details=true";
         private const string HISTORICAL_FORECAST_ENDPOINT = $"{BASE_URL}/currentconditions/v1/{{0}}/historical/24?apikey={{1}}&language={{2}}&details=true";
 
-        public AccuWeatherClient()
-        {
-        }
-
         public async Task<City[]> GetCities(string city)
         {
             string request = string.Format(SEARCH_ENDPOINT, API_KEY, city, LANGUAGE_CODE);
@@ -31,14 +33,16 @@ namespace WeatherAPP.APIClient
             }
         }
 
-        public async Task GetAlerts(City city)
+        public async Task<int> GetAlerts(City city)
         {
             string request = string.Format(ALERTS_ENDPOINT, city.Key, API_KEY, LANGUAGE_CODE);
             using (HttpClient client = new HttpClient())
             {
                 string response = await client.GetStringAsync(request);
 
-                Debug.WriteLine(response);
+                object[]? array = JsonConvert.DeserializeObject<object[]>(response);
+
+                return array is null ? 0 : array.Length;
             }
         }
 
@@ -55,36 +59,38 @@ namespace WeatherAPP.APIClient
             }
         }
 
-        public async Task GetIndices(City city)
+        public async Task<Indices[]> GetIndices(City city)
         { 
             string request = string.Format(INDICES_ENDPOINT, city.Key, API_KEY, LANGUAGE_CODE);
             using (HttpClient client = new HttpClient())
             {
                 string response = await client.GetStringAsync(request);
 
-                Debug.WriteLine(response);
+                return JsonConvert.DeserializeObject<Indices[]>(response) ?? new Indices[0];
             }
         }
 
-        public async Task Get5DayForecast(City city)
+        public async Task<FiveDayForecast?> Get5DayForecast(City city)
         {
             string request = string.Format(FIVE_DAY_FORECAST_ENDPOINT, city.Key, API_KEY, LANGUAGE_CODE);
             using (HttpClient client = new HttpClient())
             {
                 string response = await client.GetStringAsync(request);
 
-                Debug.WriteLine(response);
+                return JsonConvert.DeserializeObject<FiveDayForecast>(response);
             }
         }
 
-        public async Task GetHistorical24hForecast(City city)
+        public async Task<Historical24hForecast?> GetHistorical24hForecast(City city)
         {
             string request = string.Format(HISTORICAL_FORECAST_ENDPOINT, city.Key, API_KEY, LANGUAGE_CODE);
             using (HttpClient client = new HttpClient())
             {
                 string response = await client.GetStringAsync(request);
 
-                Debug.WriteLine(response);
+                Historical24hForecast[]? array = JsonConvert.DeserializeObject<Historical24hForecast[]>(response);
+
+                return array is null ? null : array.FirstOrDefault();
             }
         }
     }
