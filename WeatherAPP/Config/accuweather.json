@@ -1,0 +1,11 @@
+{
+  "accuweather_apikey": "LBSxEUi5eipqM5RXrbxbAJLIVssHYumD",
+  "accuweather_language_code": "pl",
+  "accuweather_base_url": "http://dataservice.accuweather.com",
+  "accuweather_city_search_endpoint": "{0}/locations/v1/cities/search?apikey={1}&q={2}&language={3}&details=true",
+  "accuweather_current_forecast_endpoint": "{0}/currentconditions/v1/{1}?apikey={2}&language={3}&metric=true&details=true",
+  "accuweather_five_day_forecast_endpoint": "{0}/forecasts/v1/daily/5day/{1}?apikey={2}&language={3}&metric=true&details=true",
+  "accuweather_historical_forecast_endpoint": "{0}/currentconditions/v1/{1}/historical?apikey={2}&language={3}&details=true",
+  "accuweather_indices_endpoint": "{0}/indices/v1/daily/1day/{1}?apikey={2}&language={3}&details=true",
+  "accuweather_weather_alarms_endpoint": "{0}/alarms/v1/1day/{1}?apikey={2}&language={3}"
+}

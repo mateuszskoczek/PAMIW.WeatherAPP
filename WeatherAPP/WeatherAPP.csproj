@@ -8,7 +8,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WeatherAPP.APIClient\WeatherAPP.APIClient.csproj" />
+    <None Remove="Config\accuweather.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Config\accuweather.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WeatherAPP.Services\WeatherAPP.Services.AccuWeather\WeatherAPP.Services.AccuWeather.csproj" />
   </ItemGroup>
 
 </Project>
